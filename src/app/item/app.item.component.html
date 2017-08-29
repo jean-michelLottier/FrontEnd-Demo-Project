@@ -1,0 +1,36 @@
+<div class="column highlight-full">
+    <section id="cv-item-section" class="section" *ngFor="let item of items">
+        <div id="cv-item-container" class="container">
+            <div class="columns">
+                <div class="column is-12">
+                    <h1 class="title">{{item.title}}</h1>
+                </div>
+                <div class="column">
+                    <a [routerLink]="['/edition',item.id]">
+                        <span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="!displayDetails || itemSeleted != item.id">
+                <p>{{item.description | slice:0:50}}<span *ngIf="item.description.length >= 50">...</span></p>
+            </div>
+            <div *ngIf="displayDetails && itemSeleted === item.id">
+                <p>{{item.startExperience}} - 
+                    <span *ngIf="item.endExperience != undefined">{{item.endExperience}}</span>
+                    <span *ngIf="item.endExperience === undefined">{{'today' | translate:lang}}</span>
+                </p>
+                <br>
+                <p>{{item.description}}</p>
+            </div>
+            <div style="text-align:center">
+                <a *ngIf="!displayDetails || itemSeleted != item.id" (click)="toggleDisplayDetails(true, item.id)">
+                    <span class="icon is-large"><i class="fa fa-angle-down"></i></span>
+                </a>
+                <a *ngIf="displayDetails && itemSeleted === item.id" (click)="toggleDisplayDetails(false, item.id)">
+                    <span class="icon is-large"><i class="fa fa-angle-up"></i></span>
+                </a>
+            </div>
+        </div>
+        <hr>
+    </section>
+</div>
