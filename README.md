@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.1.
 
+## Docker commands
+
+Build docker image:
+> docker build -t frontend-image:latest .
+
+Run docker container:
+> docker run -it -p 4200:4200 -p 8080:8080 --name frontend-container frontend-image:latest
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

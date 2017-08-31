@@ -1,4 +1,6 @@
 FROM jlot/node-angular
+MAINTAINER lottier.jm@gmail.com
+LABEL Description="This image is used to start the front-end demo project"
 
 USER root
 
