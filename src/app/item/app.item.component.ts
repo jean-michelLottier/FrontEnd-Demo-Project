@@ -13,7 +13,7 @@ import { Item } from './app.item';
 })
 export class ItemComponent implements OnInit {
     @Language() lang: string;
-    items: Item[];
+    items: Item.ItemInterface[];
     private _displayDetails: boolean;
     private _itemSelected: Number;
 
@@ -26,7 +26,7 @@ export class ItemComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.switchMap((params: ParamMap) => this.itemSevice.getItems(params.get('category')))
-        .subscribe((items: Item[]) => this.items = items);
+        .subscribe((items: Item.ItemInterface[]) => this.items = items);
     }
 
     get displayDetails (): boolean {

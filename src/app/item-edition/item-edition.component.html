@@ -1,3 +1,55 @@
-<section>
-    <p>Item edition section; item id: {{item.id}}</p>
+<section class="section">
+<div class="container">
+    <form #itemForm="ngForm" (ngSubmit)="submitItem()">
+        <div class="field">
+            <label for="title" class="label">{{'Title' | translate:lang}}*</label>
+            <div class="control">
+                <input type="text" name="title" required [(ngModel)]="item.title" minlength="3" maxlength="150" />
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="category">{{'Category' | translate:lang}}</label>
+            <div class="control">
+                <div class="select">
+                    <select name="category" [(ngModel)]="item.category">
+                        <option *ngFor="let key of categories" [value]="key" [label]="Category[key]"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="columns is-gapless">
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="from">{{'From' | translate:lang}}</label>
+                    <div class="control">
+                        <input type="date" name="from" [ngModel]="item.startExperience | date:'yyyy-MM-dd'" (ngModelChange)="item.startExperience = $event" />
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="to">{{'to' | translate:lang}}</label>
+                    <div class="control">
+                        <input type="date" name="to" [(ngModel)]="item.endExperience" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="description" class="label">{{'Description' | translate:lang}}*</label>
+            <div class="control">
+                <textarea class="textarea" name="description" required [(ngModel)]="item.description" maxlength="1000"></textarea>
+            </div>
+        </div>
+
+        <div class="field is-grouped is-grouped-right">
+            <p class="control">
+                <button class="button is-primary" type="submit" [disabled]="!itemForm.form.valid">Submit</button>
+            </p>
+            <p class="control">
+                <button class="button is-light" type="button" (click)="cancelEdition()">Cancel</button>
+            </p>
+        </div>
+    </form>
+</div>
 </section>

@@ -19,6 +19,10 @@ const routes: Routes = [
         component: ItemEditionComponent
     },
     {
+        path: 'new',
+        component: ItemEditionComponent
+    },
+    {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full' 
