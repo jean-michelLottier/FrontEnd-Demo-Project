@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-
+import 'rxjs/add/operator/switchMap';
 import { Language } from 'angular-l10n';
 
 import { Item } from '../item/app.item';
@@ -15,16 +15,19 @@ import { Category } from '../item/app.category';
 })
 export class ItemEditionComponent implements OnInit {
     @Language() lang: string;
-
+    
     Category = Category;
     categories: string[];
     item: Item.ItemInterface;
     itemMode: string;
+    isProcessing: boolean;
 
     constructor (private route: ActivatedRoute, private router: Router, 
         private itemService: ItemService, private location: Location) {
         this.categories = Object.keys(Category);
-        this.categories = this.categories.slice(0,this.categories.length / 2)
+        this.categories = this.categories.slice(0,this.categories.length / 2);
+        this.item = new Item.ItemImpl();
+        this.isProcessing = false;
         console.log("categories: " + this.categories);
     }
 
@@ -36,12 +39,11 @@ export class ItemEditionComponent implements OnInit {
                 .subscribe((item:Item.ItemInterface) => {this.item = item; console.log("item category: " + this.item.category);});
         } else {
             this.itemMode = "creation";
-            this.item = new Item.ItemImpl();
         }
     }
 
     submitItem(): void {
-        alert(`saved!!! ${JSON.stringify(this.item)}`);
+        //alert(`saved!!! ${JSON.stringify(this.item)}`);
         if(this.itemMode === "edition") {
             this.editItem();
         } else {
@@ -51,12 +53,22 @@ export class ItemEditionComponent implements OnInit {
 
     editItem(): void {
         console.log("Edit item method");
-        this.itemService.updateItem(this.item);
+        this.isProcessing = true;
+        this.itemService.updateItem(this.item).then(response => {
+            console.log("Succeeded to edit item");
+            this.cancelEdition();
+        }).catch(error => {
+            console.log("Failed to edit item");
+        });
     }
 
     createItem(): void {
         console.log("Create item method");
         this.itemService.createItem(this.item);
+    }
+
+    deleteItem(): void {
+        console.log("Delete item method");
     }
 
     cancelEdition(): void {

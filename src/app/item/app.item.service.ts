@@ -26,8 +26,23 @@ export class ItemService implements OnInit {
         return Promise.resolve(this.items.find(item => item.id === id));
     }
 
-    updateItem (item:Item.ItemInterface): void {
+    updateItem (item:Item.ItemInterface): Promise<boolean> {
         console.log("update item service");
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                this.items.forEach(el => {
+                    if(el.id === item.id) {
+                        el.category = item.category;
+                        el.description = item.description;
+                        el.title = item.title;
+                        el.startExperience = item.startExperience;
+                        el.endExperience = item.endExperience;
+                        resolve(true);
+                    }
+                });
+                reject(false);
+            }, 5000);
+        });
     }
 
     createItem (item: Item.ItemInterface): void {

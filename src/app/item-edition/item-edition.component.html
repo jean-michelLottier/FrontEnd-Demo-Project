@@ -44,12 +44,24 @@
 
         <div class="field is-grouped is-grouped-right">
             <p class="control">
-                <button class="button is-primary" type="submit" [disabled]="!itemForm.form.valid">Submit</button>
+                <button class="button is-light" type="button" (click)="cancelEdition()">Cancel</button>
+            </p>
+            <p class="control" *ngIf="itemMode === 'edition'">
+                <button class="button is-danger" type="button" (click)="deleteItem()">Delete</button>
             </p>
             <p class="control">
-                <button class="button is-light" type="button" (click)="cancelEdition()">Cancel</button>
+                <button class="button is-primary" type="submit" [disabled]="!itemForm.form.valid">Submit</button>
             </p>
         </div>
     </form>
 </div>
 </section>
+
+<div class="modal" [class.is-active]="isProcessing">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <figure class="image is-64x64" style="margin: 0 auto;">
+            <img src="../../assets/images/loading_spinner.gif" alt="" />
+        </figure>
+    </div>
+</div>

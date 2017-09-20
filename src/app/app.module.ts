@@ -26,7 +26,7 @@ import { RoutingModule } from './app.routing.module';
     FormsModule,
     HttpModule,
     RoutingModule,
-    TranslationModule.forRoot()
+    TranslationModule.forRoot(),
   ],
   providers: [ItemService],
   bootstrap: [AppComponent]
