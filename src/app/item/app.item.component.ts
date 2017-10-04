@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Language } from 'angular-l10n'
+import { Language } from 'angular-l10n';
 
 import { ItemService } from './app.item.service';
 import { Item } from './app.item';
@@ -25,6 +25,7 @@ export class ItemComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("init item component");
         this.route.paramMap.switchMap((params: ParamMap) => this.itemSevice.getItems(params.get('category')))
         .subscribe((items: Item.ItemInterface[]) => this.items = items);
     }

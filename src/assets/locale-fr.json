@@ -1,12 +1,15 @@
 {
     "Home": "Accueil",
     "Professional experiences": "Expériences proffesionelles",
+    "Professional experience": "Expérience professionelle",
     "Education": "Education",
     "Miscellaneous": "Divers",
+    "Hobby": "Loisir",
     "today": "aujourd'hui",
     "Title": "Titre",
     "From": "De",
     "to": "à",
     "New item": "Nouvel élément",
-    "Category": "Catégorie" 
+    "Category": "Catégorie",
+    "deleteDialogBody": "Êtes-vous sûre de vouloir continuer cette opération ?" 
 }

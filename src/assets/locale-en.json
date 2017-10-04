@@ -7,5 +7,6 @@
     "Title": "Title",
     "From": "From",
     "to": "to",
-    "New item": "New item"
+    "New item": "New item",
+    "deleteDialogBody": "Are you sure you want to permanently remove this item ?"
 }

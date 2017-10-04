@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http'
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
@@ -25,6 +26,7 @@ import { RoutingModule } from './app.routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RoutingModule,
     TranslationModule.forRoot(),
   ],

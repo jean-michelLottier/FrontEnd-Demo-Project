@@ -18,7 +18,9 @@ COPY . /demo_project
 #COPY tsconfig.json /demo_project
 #COPY tslint.json /demo_project
 
-RUN cd /demo_project
+RUN useradd -m front; cd /demo_project
+
+USER front
 
 EXPOSE 4200 8080
 

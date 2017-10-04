@@ -2,9 +2,9 @@
 <div class="container">
     <form #itemForm="ngForm" (ngSubmit)="submitItem()">
         <div class="field">
-            <label for="title" class="label">{{'Title' | translate:lang}}*</label>
+            <label for="titleId" class="label">{{'Title' | translate:lang}}*</label>
             <div class="control">
-                <input type="text" name="title" required [(ngModel)]="item.title" minlength="3" maxlength="150" />
+                <input id="titleId" type="text" name="title" required [(ngModel)]="item.title" minlength="3" maxlength="150" />
             </div>
         </div>
         <div class="field">
@@ -12,7 +12,7 @@
             <div class="control">
                 <div class="select">
                     <select name="category" [(ngModel)]="item.category">
-                        <option *ngFor="let key of categories" [value]="key" [label]="Category[key]"></option>
+                        <option *ngFor="let key of categories" [value]="key" [label]="Category[key] | translate:lang"></option>
                     </select>
                 </div>
             </div>
@@ -30,27 +30,27 @@
                 <div class="field">
                     <label class="label" for="to">{{'to' | translate:lang}}</label>
                     <div class="control">
-                        <input type="date" name="to" [(ngModel)]="item.endExperience" />
+                        <input type="date" name="to" [ngModel]="item.endExperience | date: 'yyyy-MM-dd'" (ngModelChange)="item.endExperience = $event" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="field">
-            <label for="description" class="label">{{'Description' | translate:lang}}*</label>
+            <label for="descriptionId" class="label">{{'Description' | translate:lang}}*</label>
             <div class="control">
-                <textarea class="textarea" name="description" required [(ngModel)]="item.description" maxlength="1000"></textarea>
+                <textarea id="descriptionId" class="textarea" name="description" required [(ngModel)]="item.description" maxlength="1000"></textarea>
             </div>
         </div>
 
         <div class="field is-grouped is-grouped-right">
             <p class="control">
-                <button class="button is-light" type="button" (click)="cancelEdition()">Cancel</button>
+                <button class="button is-light" type="button" (click)="cancelEdition()">{{'Cancel' | translate:lang}}</button>
             </p>
             <p class="control" *ngIf="itemMode === 'edition'">
-                <button class="button is-danger" type="button" (click)="deleteItem()">Delete</button>
+                <button class="button is-danger" type="button" (click)="preDeleteItem()">{{'Delete' | translate:lang}}</button>
             </p>
             <p class="control">
-                <button class="button is-primary" type="submit" [disabled]="!itemForm.form.valid">Submit</button>
+                <button class="button is-primary" type="submit" [disabled]="!itemForm.form.valid">{{'Submit' | translate:lang}}</button>
             </p>
         </div>
     </form>
@@ -63,5 +63,30 @@
         <figure class="image is-64x64" style="margin: 0 auto;">
             <img src="../../assets/images/loading_spinner.gif" alt="" />
         </figure>
+    </div>
+</div>
+
+<div class="modal" [class.is-active]="isDeleting">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">{{'Cancellation' | translate:lang}}</p>
+        </header>
+        <section class="modal-card-body">
+            <div class="columns">
+                <div class="column">
+                    <span class="icon is-large">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="column is-three-quarters" style="margin: 3% 0%;">
+                    <p>{{'deleteDialogBody' | translate:lang}}</p>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" (click)="deleteItem()">{{'Yes' | translate:lang}}</button>
+            <button class="button" (click)="closeDeleteItem()">{{'No' | translate:lang}}</button>
+        </footer>
     </div>
 </div>

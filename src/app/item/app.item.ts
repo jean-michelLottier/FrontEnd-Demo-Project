@@ -2,8 +2,10 @@ import { Category } from './app.category';
 import { EventEmitter } from '@angular/core';
 
 export namespace Item {
+    export const BACKEND_URL = "http://127.0.0.1:8081";
+
     export interface ItemInterface {
-        id: Number;
+        id: number;
         category: Category;
         title: string;
         description: string;
@@ -13,13 +15,13 @@ export namespace Item {
     }
 
     export class ItemImpl implements ItemInterface {
-        id: Number;
-        _category: Category;
-        _title: string;
-        _description: string;
-        createdDate: Date;
-        _startExperience: Date;
-        _endExperience: Date;
+        private _id: number;
+        private _category: Category;
+        private _title: string;
+        private _description: string;
+        private _createdDate: Date;
+        private _startExperience: Date;
+        private _endExperience: Date;
 
         constructor() {
             this._category = Category.PROFESSIONAL_EXPERIENCE;
@@ -72,6 +74,22 @@ export namespace Item {
 
         get endExperience() {
             return this._endExperience;
+        }
+
+        set id(id:number) {
+            this._id = id;
+        }
+
+        get id() {
+            return this._id;
+        }
+
+        set createdDate(createdDate:Date) {
+            this._createdDate = createdDate;
+        }
+
+        get createdDate() {
+            return this._createdDate;
         }
     }
 }

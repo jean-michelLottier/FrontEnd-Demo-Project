@@ -21,14 +21,14 @@ export class ItemEditionComponent implements OnInit {
     item: Item.ItemInterface;
     itemMode: string;
     isProcessing: boolean;
+    isDeleting: boolean;
 
     constructor (private route: ActivatedRoute, private router: Router, 
         private itemService: ItemService, private location: Location) {
         this.categories = Object.keys(Category);
-        this.categories = this.categories.slice(0,this.categories.length / 2);
         this.item = new Item.ItemImpl();
         this.isProcessing = false;
-        console.log("categories: " + this.categories);
+        this.isDeleting = false;
     }
 
     ngOnInit () {
@@ -36,14 +36,15 @@ export class ItemEditionComponent implements OnInit {
             this.itemMode = "edition";
             this.route.paramMap.switchMap(
                 (params: ParamMap) => this.itemService.getItem(+params.get('id')))
-                .subscribe((item:Item.ItemInterface) => {this.item = item; console.log("item category: " + this.item.category);});
+                .subscribe((item:Item.ItemInterface) => {
+                    this.item = item
+            });
         } else {
             this.itemMode = "creation";
         }
     }
 
     submitItem(): void {
-        //alert(`saved!!! ${JSON.stringify(this.item)}`);
         if(this.itemMode === "edition") {
             this.editItem();
         } else {
@@ -54,21 +55,43 @@ export class ItemEditionComponent implements OnInit {
     editItem(): void {
         console.log("Edit item method");
         this.isProcessing = true;
-        this.itemService.updateItem(this.item).then(response => {
+        this.itemService.updateItem(this.item).subscribe(res => {
             console.log("Succeeded to edit item");
             this.cancelEdition();
-        }).catch(error => {
+        }, error => {
             console.log("Failed to edit item");
         });
     }
 
     createItem(): void {
         console.log("Create item method");
-        this.itemService.createItem(this.item);
+        this.isProcessing = true;
+        this.itemService.createItem(this.item).subscribe(res => {
+            console.log("Succeeded to create item");
+            this.cancelEdition();
+        }, error => {
+            console.log("Failed to create item");
+        });
+    }
+
+    preDeleteItem(): void {
+        this.isDeleting = true;
     }
 
     deleteItem(): void {
         console.log("Delete item method");
+        this.isDeleting = false;
+        this.isProcessing = true;
+        this.itemService.deleteItem(this.item.id).subscribe(res => {
+            console.log("Succeeded to delete item");
+            this.cancelEdition();
+        }, error => {
+            console.log("Failed to delete item");
+        });
+    }
+
+    closeDeleteItem(): void {
+        this.isDeleting = false;
     }
 
     cancelEdition(): void {

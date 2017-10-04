@@ -1,5 +1,5 @@
 export enum Category {
-    EDUCATION,
-    PROFESSIONAL_EXPERIENCE,
-    HOBBY
+    EDUCATION = "Education",
+    PROFESSIONAL_EXPERIENCE = "Professional experience",
+    HOBBY = "Hobby"
 }
