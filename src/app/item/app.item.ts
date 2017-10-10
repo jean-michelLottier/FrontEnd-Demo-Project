@@ -2,7 +2,7 @@ import { Category } from './app.category';
 import { EventEmitter } from '@angular/core';
 
 export namespace Item {
-    export const BACKEND_URL = "http://127.0.0.1:8081";
+    export const BACKEND_URL = "http://backend:8081";
 
     export interface ItemInterface {
         id: number;
