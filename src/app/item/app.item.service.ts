@@ -18,7 +18,10 @@ export class ItemService implements OnInit {
 
     getItems (category: string): Observable<Item.ItemInterface[]> {
         console.log("itemService: getItems")
-        return this.http.get<Item.ItemImpl[]>(Item.BACKEND_URL + '/' + category);
+        return this.http.get<Item.ItemImpl[]>(Item.BACKEND_URL + '/' + category,{
+            headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
+            withCredentials: true
+        });
     }
 
     getItem (id: number): Observable<Item.ItemInterface> {

@@ -27,7 +27,10 @@ export class ItemComponent implements OnInit {
     ngOnInit() {
         console.log("init item component");
         this.route.paramMap.switchMap((params: ParamMap) => this.itemSevice.getItems(params.get('category')))
-        .subscribe((items: Item.ItemInterface[]) => this.items = items);
+        .subscribe((items: Item.ItemInterface[]) => this.items = items, error => {
+            //TODO: traiter le cas ou le statut est 401 (message à afficher pour le user)
+            console.log("error: " + error.status);
+        });
     }
 
     get displayDetails (): boolean {

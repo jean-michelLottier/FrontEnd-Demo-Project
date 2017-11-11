@@ -1,0 +1,53 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title" style="text-align: center;">Sign in to MyCV</h1>
+        <div class="tile is-ancestor" style="margin: 0% 20%;">
+            <div class="tile is-vertical is-parent">
+                <article class="tile is-child box">
+                    <form #loginForm="ngForm" (ngSubmit)="signin()">
+                        <div class="field sign-in-field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input name="email" 
+                                        class="input is-medium" 
+                                        type="email" 
+                                        placeholder="Email" 
+                                        required
+                                        [(ngModel)]="login" />
+                                <span class="icon is-medium is-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <span class="icon is-medium is-right">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field sign-in-field">
+                            <p class="control has-icons-left">
+                                <input name="password" 
+                                        class="input is-medium" 
+                                        type="password" 
+                                        placeholder="Password" 
+                                        required
+                                        [(ngModel)]="password">
+                                <span class="icon is-medium is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field is-grouped is-grouped-right sign-in-field">
+                            <p class="control">
+                                <button class="button is-primary is-outlined is-medium" 
+                                        [class.is-loading]="isProcessing"
+                                        type="submit" 
+                                        [disabled]="!loginForm.form.valid">{{'Sign in' | translate:lang}}</button>
+                            </p>
+                        </div>
+                    </form>
+                </article>
+                <article class="tile is-child box">
+                    <p>TODO: redirection vers page sign up</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

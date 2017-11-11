@@ -37,7 +37,9 @@ export class ItemEditionComponent implements OnInit {
             this.route.paramMap.switchMap(
                 (params: ParamMap) => this.itemService.getItem(+params.get('id')))
                 .subscribe((item:Item.ItemInterface) => {
-                    this.item = item
+                    this.item = item;
+            }, error => {
+                console.log("error: " + error);
             });
         } else {
             this.itemMode = "creation";
@@ -59,7 +61,7 @@ export class ItemEditionComponent implements OnInit {
             console.log("Succeeded to edit item");
             this.cancelEdition();
         }, error => {
-            console.log("Failed to edit item");
+            console.log("Failed to edit item: " + error);
         });
     }
 
@@ -70,7 +72,7 @@ export class ItemEditionComponent implements OnInit {
             console.log("Succeeded to create item");
             this.cancelEdition();
         }, error => {
-            console.log("Failed to create item");
+            console.log("Failed to create item: " + error);
         });
     }
 
@@ -99,7 +101,7 @@ export class ItemEditionComponent implements OnInit {
         if (this.itemMode === "edition") {
             this.location.back();
         } else {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/view/home']);
         }
     }
 }
