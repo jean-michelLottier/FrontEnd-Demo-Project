@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
     selector: 'app-default',
     templateUrl: './app.default.component.html'
 })
-export class DefaultComponent {
-    
+export class DefaultComponent implements OnInit {
+    ngOnInit(){}
 }

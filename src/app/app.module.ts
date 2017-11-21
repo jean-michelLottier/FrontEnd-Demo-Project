@@ -42,6 +42,9 @@ export class AppModule {
   constructor (public locale: LocaleService, public translation: TranslationService) {
     this.locale.addConfiguration().addLanguages(['en', 'fr']).setCookieExpiration(30).defineLanguage('fr');
     this.translation.addConfiguration().addProvider('../assets/locale-');
+    if(localStorage.getItem('lang') == undefined) {
+      localStorage.setItem('lang', 'fr');
+    }
     this.translation.init();
   }
  }

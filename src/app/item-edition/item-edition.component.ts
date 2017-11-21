@@ -39,7 +39,10 @@ export class ItemEditionComponent implements OnInit {
                 .subscribe((item:Item.ItemInterface) => {
                     this.item = item;
             }, error => {
-                console.log("error: " + error);
+                console.log("error: " + error.status);
+                if(error.status === 401) {
+                    this.router.navigate(['/login']);
+                }
             });
         } else {
             this.itemMode = "creation";
@@ -61,7 +64,10 @@ export class ItemEditionComponent implements OnInit {
             console.log("Succeeded to edit item");
             this.cancelEdition();
         }, error => {
-            console.log("Failed to edit item: " + error);
+            console.log("Failed to edit item: " + error.status);
+            if(error.status === 401) {
+                this.router.navigate(['/login']);
+            }
         });
     }
 
@@ -72,7 +78,10 @@ export class ItemEditionComponent implements OnInit {
             console.log("Succeeded to create item");
             this.cancelEdition();
         }, error => {
-            console.log("Failed to create item: " + error);
+            console.log("Failed to create item: " + error.status);
+            if(error.status === 401) {
+                this.router.navigate(['/login']);
+            }
         });
     }
 
@@ -89,6 +98,9 @@ export class ItemEditionComponent implements OnInit {
             this.cancelEdition();
         }, error => {
             console.log("Failed to delete item");
+            if(error.status === 401) {
+                this.router.navigate(['/login']);
+            }
         });
     }
 

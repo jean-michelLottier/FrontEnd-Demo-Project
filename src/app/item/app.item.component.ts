@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Language } from 'angular-l10n';
+import { LocaleService, Language } from 'angular-l10n';
 
 import { ItemService } from './app.item.service';
 import { Item } from './app.item';
@@ -18,18 +18,21 @@ export class ItemComponent implements OnInit {
     private _itemSelected: Number;
 
     constructor(private itemSevice: ItemService, private route: ActivatedRoute,
-                private router: Router) {
+                private router: Router, private localeService: LocaleService) {
         console.log("ItemComponent constructor");
         this._displayDetails = false;
         this._itemSelected = 0;
     }
 
     ngOnInit() {
-        console.log("init item component");
-        this.route.paramMap.switchMap((params: ParamMap) => this.itemSevice.getItems(params.get('category')))
+        let language = this.localeService.getCurrentLanguage();
+        this.route.paramMap.switchMap((params: ParamMap) => this.itemSevice.getItems(params.get('category'), language))
         .subscribe((items: Item.ItemInterface[]) => this.items = items, error => {
             //TODO: traiter le cas ou le statut est 401 (message à afficher pour le user)
             console.log("error: " + error.status);
+            if(error.status === 401) {
+                this.router.navigate(['/login']);
+            }
         });
     }
 

@@ -2,6 +2,9 @@ import { Category } from './app.category';
 import { EventEmitter } from '@angular/core';
 
 export namespace Item {
+    // Dev mode
+    /* export const BACKEND_URL = "http://localhost:8081"; */
+    // Prod mode
     export const BACKEND_URL = "http://demoproject:8081";
 
     export interface ItemInterface {
@@ -12,6 +15,7 @@ export namespace Item {
         createdDate: Date;
         startExperience: Date;
         endExperience: Date;
+        language: string;
     }
 
     export class ItemImpl implements ItemInterface {
@@ -22,6 +26,7 @@ export namespace Item {
         private _createdDate: Date;
         private _startExperience: Date;
         private _endExperience: Date;
+        private _language: string;
 
         constructor() {
             this._category = Category.PROFESSIONAL_EXPERIENCE;
@@ -90,6 +95,14 @@ export namespace Item {
 
         get createdDate() {
             return this._createdDate;
+        }
+
+        set language(language: string) {
+            this._language = language;
+        }
+
+        get language() {
+            return this._language;
         }
     }
 }

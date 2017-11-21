@@ -16,33 +16,45 @@ export class ItemService implements OnInit {
 
     ngOnInit () {}
 
-    getItems (category: string): Observable<Item.ItemInterface[]> {
+    getItems (category: string, lang: string): Observable<Item.ItemInterface[]> {
         console.log("itemService: getItems")
-        return this.http.get<Item.ItemImpl[]>(Item.BACKEND_URL + '/' + category,{
+        return this.http.get<Item.ItemImpl[]>(Item.BACKEND_URL + '/' + lang + '/' + category,{
             headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
             withCredentials: true
         });
     }
 
     getItem (id: number): Observable<Item.ItemInterface> {
-        return this.http.get<Item.ItemImpl>(Item.BACKEND_URL + '/item/' + id);
+        return this.http.get<Item.ItemImpl>(Item.BACKEND_URL + '/item/' + id, {
+            headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
+            withCredentials: true
+        });
     }
 
     updateItem (item:Item.ItemInterface) {
         console.log("update item service");
-        return this.http.post(Item.BACKEND_URL + '/update', item);
+        return this.http.post(Item.BACKEND_URL + '/update', item, {
+            headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
+            withCredentials: true
+        });
     }
 
     createItem (item:Item.ItemInterface) {
         console.log("create item service");
-        let body = JSON.stringify(item).replace(new RegExp('_', 'g'), "");
+        let body = JSON.stringify(item).replace(new RegExp('\"_', 'ig'), "\"");
 
-        return this.http.post(Item.BACKEND_URL + "/new", body, {headers: (new HttpHeaders()).set('Content-Type', 'application/json')});
+        return this.http.post(Item.BACKEND_URL + "/new", body, {
+            headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
+            withCredentials: true
+        });
     }
 
     deleteItem(id: number) {
         console.log("delete item service");
-        return this.http.get(Item.BACKEND_URL + '/delete/' + id);
+        return this.http.get(Item.BACKEND_URL + '/delete/' + id, {
+            headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
+            withCredentials: true
+        });
     }
     
 }
