@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import { Language } from 'angular-l10n';
+import { Language, TranslationService } from 'angular-l10n';
 
 import { Item } from '../item/app.item';
 import { ItemService } from '../item/app.item.service';
 import { Category } from '../item/app.category';
+import { AlertService } from '../alert/app.alert.service';
 
 @Component ({
     moduleId: module.id,
@@ -24,7 +25,8 @@ export class ItemEditionComponent implements OnInit {
     isDeleting: boolean;
 
     constructor (private route: ActivatedRoute, private router: Router, 
-        private itemService: ItemService, private location: Location) {
+        private itemService: ItemService, private location: Location, 
+        private alertService: AlertService, private translationService: TranslationService) {
         this.categories = Object.keys(Category);
         this.item = new Item.ItemImpl();
         this.isProcessing = false;
@@ -32,6 +34,8 @@ export class ItemEditionComponent implements OnInit {
     }
 
     ngOnInit () {
+        this.alertService.clearAlert();
+        
         if(this.router.url.includes('edition')){
             this.itemMode = "edition";
             this.route.paramMap.switchMap(
@@ -42,6 +46,8 @@ export class ItemEditionComponent implements OnInit {
                 console.log("error: " + error.status);
                 if(error.status === 401) {
                     this.router.navigate(['/login']);
+                } else {
+                    this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefused"));
                 }
             });
         } else {
@@ -67,6 +73,9 @@ export class ItemEditionComponent implements OnInit {
             console.log("Failed to edit item: " + error.status);
             if(error.status === 401) {
                 this.router.navigate(['/login']);
+            } else {
+                this.isProcessing = false;
+                this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefusedSend"));
             }
         });
     }
@@ -81,6 +90,9 @@ export class ItemEditionComponent implements OnInit {
             console.log("Failed to create item: " + error.status);
             if(error.status === 401) {
                 this.router.navigate(['/login']);
+            } else {
+                this.isProcessing = false;
+                this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefusedSend"));
             }
         });
     }
@@ -100,6 +112,9 @@ export class ItemEditionComponent implements OnInit {
             console.log("Failed to delete item");
             if(error.status === 401) {
                 this.router.navigate(['/login']);
+            } else {
+                this.isProcessing = false;
+                this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefusedSend"));
             }
         });
     }

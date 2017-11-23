@@ -8,5 +8,8 @@
     "From": "From",
     "to": "to",
     "New item": "New item",
-    "deleteDialogBody": "Are you sure you want to permanently remove this item ?"
+    "deleteDialogBody": "Are you sure you want to permanently remove this item ?",
+    "Wrong credential": "Your login/password are not correct",
+    "ErrConnectionRefused": "It seems we encounter difficulty to access to your information",
+    "ErrConnectionRefusedSend": "It seems we encounter difficulty to treat your information"
 }

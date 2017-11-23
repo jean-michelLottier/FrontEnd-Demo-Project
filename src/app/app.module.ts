@@ -16,9 +16,12 @@ import { LoginComponent } from './login/app.login.component';
 import { LoginService } from './login/app.login.service';
 import { NavComponent } from './nav/app.nav.component';
 import { RoutingModule } from './app.routing.module';
+import { AlertComponent } from './alert/app.alert.component';
+import { AlertService } from './alert/app.alert.service';
 
 @NgModule({
   declarations: [
+    AlertComponent,
     AppComponent,
     DefaultComponent,
     HomeComponent,
@@ -35,7 +38,7 @@ import { RoutingModule } from './app.routing.module';
     RoutingModule,
     TranslationModule.forRoot(),
   ],
-  providers: [ItemService, LoginService],
+  providers: [ItemService, LoginService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

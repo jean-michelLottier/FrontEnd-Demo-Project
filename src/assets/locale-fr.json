@@ -11,5 +11,8 @@
     "to": "à",
     "New item": "Nouvel élément",
     "Category": "Catégorie",
-    "deleteDialogBody": "Êtes-vous sûre de vouloir continuer cette opération ?" 
+    "deleteDialogBody": "Êtes-vous sûre de vouloir continuer cette opération ?",
+    "Wrong credential": "Votre identifiant/mode de passe ne sont pas correctes",
+    "ErrConnectionRefused": "Il semblerait que nous rencontrions des difficultés à accéder à vos information",
+    "ErrConnectionRefusedSend": "Il semblerait que nous rencontrions des difficultés à traiter vos information" 
 }

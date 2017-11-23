@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginService } from './app.login.service';
+import { AlertService } from '../alert/app.alert.service';
+import { Language, TranslationService } from 'angular-l10n';
 
 @Component({
     moduleId: module.id,
@@ -9,14 +11,18 @@ import { LoginService } from './app.login.service';
     templateUrl: "./app.login.component.html"
 })
 export class LoginComponent implements OnInit {
+    @Language()
+    lang: string;
     login: string;
     password: string;
     isProcessing: boolean;
 
-    constructor(private loginService: LoginService, private router: Router) {}
+    constructor(private loginService: LoginService, private router: Router,
+            private alertService: AlertService, private translationService: TranslationService) {}
     
     ngOnInit() {
         console.log('LoginComponent initiated');
+        this.alertService.clearAlert();
         this.isProcessing = false;
     }
 
@@ -29,6 +35,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/view/home']);
         }, error => {
             console.log("Failed to sign in. status: " + error.status);
+            this.alertService.errorAlert(this.translationService.translate("Wrong credential"));
             this.login = "";
             this.password = "";
             this.isProcessing = false;

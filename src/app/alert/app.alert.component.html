@@ -1,0 +1,7 @@
+<div class="container alert-container">
+    <div class="notification" *ngFor="let alert of alerts; let i = index" 
+        [ngClass]="{'is-info': alert.type === 0, 'is-success': alert.type === 1, 'is-warning': alert.type === 2, 'is-danger': alert.type === 3}">
+        <button class="delete" (click)="closeAlert(i)"></button>
+        {{alert.message}}
+    </div>
+</div>

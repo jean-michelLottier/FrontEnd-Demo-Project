@@ -6,5 +6,8 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './app.default.component.html'
 })
 export class DefaultComponent implements OnInit {
-    ngOnInit(){}
+    
+    constructor() {}
+
+    ngOnInit() {}
 }
