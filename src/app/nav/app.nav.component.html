@@ -1,22 +1,22 @@
 <div class="container">
-    <div class="navbar">
-        <div class="navbar-menu nav-center">
-            <a class="navbar-item" routerLink="/view/home" routerLinkActive="active">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-tabs nav-center">
+            <a class="navbar-item is-tab" routerLink="/view/home" routerLinkActive="is-active">
                 {{'Home' | translate:lang}}
             </a>
-            <a class="navbar-item" [routerLink]="['/view/category', 'professional_experience']" routerLinkActive="active">
+            <a class="navbar-item is-tab" [routerLink]="['/view/category', 'professional_experience']" routerLinkActive="is-active">
                 {{'Professional experiences' | translate:lang}}
             </a>
-            <a class="navbar-item" [routerLink]="['/view/category', 'education']" routerLinkActive="active">
+            <a class="navbar-item is-tab" [routerLink]="['/view/category', 'education']" routerLinkActive="is-active">
                 {{'Education' | translate:lang}}
             </a>
-            <a class="navbar-item" [routerLink]="['/view/category', 'hobby']" routerLinkActive="active">
+            <a class="navbar-item is-tab" [routerLink]="['/view/category', 'hobby']" routerLinkActive="is-active">
                 {{'Miscellaneous' | translate:lang}}
             </a>
-            <a class="navbar-item" routerLink="/view/new" routerLinkActive="active">
+            <a class="navbar-item is-tab" routerLink="/view/new" routerLinkActive="is-active">
                 {{'New item' | translate:lang}}
             </a>
         </div>
-    </div>
+    </nav>
 </div>
 <br>
