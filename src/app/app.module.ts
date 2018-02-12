@@ -18,6 +18,8 @@ import { NavComponent } from './nav/app.nav.component';
 import { RoutingModule } from './app.routing.module';
 import { AlertComponent } from './alert/app.alert.component';
 import { AlertService } from './alert/app.alert.service';
+import { BusinessCardService } from './business_card/app.businesscard.service';
+import { BusinessCardAlertService } from './business_card/app.businesscard.alert.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { AlertService } from './alert/app.alert.service';
     RoutingModule,
     TranslationModule.forRoot(),
   ],
-  providers: [ItemService, LoginService, AlertService],
+  providers: [ItemService, LoginService, AlertService, BusinessCardService, BusinessCardAlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

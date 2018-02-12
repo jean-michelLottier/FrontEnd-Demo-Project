@@ -6,6 +6,9 @@ import { LocaleService, Language, TranslationService } from 'angular-l10n';
 import { ItemService } from './app.item.service';
 import { Item } from './app.item';
 import { AlertService } from '../alert/app.alert.service';
+import { BusinessCardService }  from '../business_card/app.businesscard.service';
+import { BusinessCardAlertService } from '../business_card/app.businesscard.alert.service';
+import { IBusinessCard } from '../business_card/app.ibusinesscard';
 
 @Component({
     moduleId: module.id,
@@ -20,7 +23,8 @@ export class ItemComponent implements OnInit {
 
     constructor(private itemSevice: ItemService, private route: ActivatedRoute,
                 private router: Router, private localeService: LocaleService,
-                private alertService: AlertService, private translationService: TranslationService) {
+                private alertService: AlertService, private translationService: TranslationService,
+                private businessCardService: BusinessCardService, private businessCardAlertService: BusinessCardAlertService) {
         console.log("ItemComponent constructor");
         this._displayDetails = false;
         this._itemSelected = 0;
@@ -36,6 +40,12 @@ export class ItemComponent implements OnInit {
             } else {
                 this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefused"));
             }
+        });
+
+        this.businessCardService.getBusinessCard("", language).subscribe((bc: IBusinessCard) => {
+            this.businessCardAlertService.alertBusinessCard(bc);
+        }, error => {
+            this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefused"));
         });
     }
 

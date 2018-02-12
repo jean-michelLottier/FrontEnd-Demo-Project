@@ -11,5 +11,17 @@
     "deleteDialogBody": "Are you sure you want to permanently remove this item ?",
     "Wrong credential": "Your login/password are not correct",
     "ErrConnectionRefused": "It seems we encounter difficulty to access to your information",
-    "ErrConnectionRefusedSend": "It seems we encounter difficulty to treat your information"
+    "ErrConnectionRefusedSend": "It seems we encounter difficulty to treat your information",
+    "DescribeYourselfHere": "Describe yourself here...",
+    "Summary": "Summary",
+    "Cancel": "Cancel",
+    "Validate": "Validate",
+    "Information": "Information",
+    "Birthdate": "Birthdate",
+    "Birthdate2": "Birthdate",
+    "Phone": "Phone",
+    "Email": "Email",
+    "Name": "Name",
+    "LastName": "Surname",
+    "YourPersonalInformationHaveBeenUpdated": "Your personal information have been updated"
 }

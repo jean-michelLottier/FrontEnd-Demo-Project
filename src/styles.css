@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bulma/css/bulma.css';
-@import '../src/assets/font-awesome-4.7.0/css/font-awesome.min.css';
 
 .sign-in-field {
     margin: 5% 0%; 
@@ -13,4 +12,12 @@
 
 a {
     text-decoration: none !important;
+}
+
+.summary-edition:hover {
+    color: #00d1b2;
+}
+
+.footer {
+    padding-bottom: 3rem;
 }

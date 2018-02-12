@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import { Language, TranslationService } from 'angular-l10n';
+import { LocaleService, Language, TranslationService } from 'angular-l10n';
 
 import { Item } from '../item/app.item';
 import { ItemService } from '../item/app.item.service';
 import { Category } from '../item/app.category';
 import { AlertService } from '../alert/app.alert.service';
+import { BusinessCardService } from '../business_card/app.businesscard.service';
+import { BusinessCardAlertService } from '../business_card/app.businesscard.alert.service';
+import { IBusinessCard } from '../business_card/app.ibusinesscard';
 
 @Component ({
     moduleId: module.id,
@@ -24,9 +27,10 @@ export class ItemEditionComponent implements OnInit {
     isProcessing: boolean;
     isDeleting: boolean;
 
-    constructor (private route: ActivatedRoute, private router: Router, 
+    constructor (private route: ActivatedRoute, private router: Router, private localeService: LocaleService,
         private itemService: ItemService, private location: Location, 
-        private alertService: AlertService, private translationService: TranslationService) {
+        private alertService: AlertService, private translationService: TranslationService,
+        private businessCardService: BusinessCardService, private businessCardAlertService: BusinessCardAlertService) {
         this.categories = Object.keys(Category);
         this.item = new Item.ItemImpl();
         this.isProcessing = false;
@@ -53,6 +57,13 @@ export class ItemEditionComponent implements OnInit {
         } else {
             this.itemMode = "creation";
         }
+
+        let language = this.localeService.getCurrentLanguage();
+        this.businessCardService.getBusinessCard("", language).subscribe((bc: IBusinessCard) => {
+            this.businessCardAlertService.alertBusinessCard(bc);
+        }, error => {
+            this.alertService.warnAlert(this.translationService.translate("ErrConnectionRefused"));
+        });
     }
 
     submitItem(): void {

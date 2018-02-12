@@ -1,10 +1,12 @@
 <app-nav></app-nav>
-
-<div class="container" style="text-align:center">
-    <h1 class="title">Information Technology Engineer</h1>
-    <h1 class="subtitle">Jean-Michel Lottier</h1>
-</div>
-
+<section class="hero">
+    <div class="hero-body">
+        <div class="container" style="text-align:center">
+            <h1 class="title">{{businessCard.title}}</h1>
+            <h1 class="subtitle">{{businessCard.name}} {{businessCard.lastname}}</h1>
+        </div>
+    </div>
+</section>
 <alert></alert>
 
 <router-outlet></router-outlet>

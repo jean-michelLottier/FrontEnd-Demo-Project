@@ -27,12 +27,12 @@ export class AppComponent implements OnInit {
     localStorage.setItem('lang', language);
     
     this.changeLanguage(language);
-    
-    if(this.router.url.toString().indexOf("category") != -1) {
+    window.location.reload();
+    /*if(this.router.url.toString().indexOf("category") != -1) {
       window.location.reload();
     } else {
       this.router.navigate([this.router.url.toString()]);
-    }
+    }*/
   }
 
   private changeLanguage(language: string) {

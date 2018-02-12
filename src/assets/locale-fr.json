@@ -14,5 +14,17 @@
     "deleteDialogBody": "Êtes-vous sûre de vouloir continuer cette opération ?",
     "Wrong credential": "Votre identifiant/mode de passe ne sont pas correctes",
     "ErrConnectionRefused": "Il semblerait que nous rencontrions des difficultés à accéder à vos information",
-    "ErrConnectionRefusedSend": "Il semblerait que nous rencontrions des difficultés à traiter vos information" 
+    "ErrConnectionRefusedSend": "Il semblerait que nous rencontrions des difficultés à traiter vos information",
+    "DescribeYourselfHere": "Présente toi ici...",
+    "Summary": "En bref",
+    "Cancel": "Annuler",
+    "Validate": "Valider",
+    "Information": "Information",
+    "Birthdate": "Né.e le",
+    "Birthdate2": "Date de naissance",
+    "Phone": "Tel",
+    "Email": "Email",
+    "Name": "Prénom",
+    "LastName": "Nom",
+    "YourPersonalInformationHaveBeenUpdated": "Vos information personnelles ont été mis à jour"
 }

@@ -1,18 +1,156 @@
 <div class="container" style="margin-bottom: 2%;">
     <div class="tile is-ancestor">
         <div class="tile is-parent">
-            <article class="tile is-child notification is-light">
-                <h1 class="title">En bref</h1>
-                <p>presentation ici...</p>
-                <p>on continue...</p>
-                <p>...on termine</p>
+            <article *ngIf="!isSummaryEditable" class="tile is-child notification is-light">
+                <div class="columns">
+                    <div class="column"><h1 class="title">{{"Summary" | translate:lang}}</h1></div>
+                    <div class="column is-2">
+                        <a (click)="editSummary()" style="float:right;">
+                            <span class="icon is-small summary-edition"><i class="fa fa-edit"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <p>{{businessCard.summary}}</p>
             </article>
+            <form class="tile is-child notification is-light"
+            #bcSummaryForm="ngForm" (ngSubmit)="submitBusinessCard()" *ngIf="isSummaryEditable">
+                <h1 class="title">{{"Summary" | translate:lang}}</h1>
+                <div class="field">
+                    <textarea class="textarea" name="summary" placeholder="{{'DescribeYourselfHere' | translate:lang}}"
+                    [(ngModel)]="copyBusinessCard.summary" maxlength="1000"></textarea>
+                </div>
+                <div class="field is-grouped is-grouped-right">
+                    <p class="control">
+                        <button type="button" class="button" (click)="cancelSummary()">{{"Cancel" | translate:lang}}</button>
+                    </p>
+                    <p class="control">
+                        <button type="submit" class="button is-primary" [class.is-loading]="isProcessing" [disabled]="!bcSummaryForm.form.valid">{{"Validate" | translate:lang}}</button>
+                    </p>
+                </div>
+            </form>
         </div>
-        <div class="tile is-vertical is-parent is-4">
-            <article class="tile is-child notification is-primary">
-                <h1 class="title">Carte de viste</h1>
-                <p>TODO</p>
+        <div class="tile is-vertical is-parent is-5">
+            <article class="tile is-child notification is-primary" *ngIf="!isDescriptionEditable">
+                <div class="columns">
+                    <div class="column"><h1 class="title is-3">{{"Information" | translate:lang}}</h1></div>
+                    <div class="column is-2">
+                        <a (click)="editDescription()" style="float:right;">
+                            <span class="icon is-small"><i class="fa fa-edit"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-5">
+                        <span class="icon"><i class="fas fa-birthday-cake"></i></span>
+                        <span class="title is-5">{{"Birthdate" | translate:lang}}</span>
+                    </div>
+                    <div class="column">
+                        <p>{{businessCard.birthdate | date:'shortDate'}}</p>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-5">
+                        <span class="icon"><i class="fas fa-phone"></i></span>
+                        <span class="title is-5">{{"Phone" | translate:lang}}</span>
+                    </div>
+                    <div class="column">
+                        <p>{{businessCard.phone}}</p>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-5">
+                        <span class="icon"><i class="fas fa-at"></i></span>
+                        <span class="title is-5">{{"Email" | translate:lang}}</span>
+                    </div>
+                    <div class="column">
+                        <p>{{businessCard.email}}</p>
+                    </div>
+                </div>
             </article>
+            <form class="tile is-child notification is-primary" *ngIf="isDescriptionEditable"
+            #bcDescriptionForm="ngForm" (ngSubmit)="submitBusinessCard()">
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label for="iTitle" class="label">{{"Title" | translate:lang}}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input id="iTitle" class="input is-small" type="text" name="title" maxlength="100" [(ngModel)]="copyBusinessCard.title" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label for="iName" class="label">{{"Name" | translate:lang}}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input id="iName" class="input is-small" type="text" name="name" maxlength="20" [(ngModel)]="copyBusinessCard.name" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label for="iLastName" class="label">{{"LastName" | translate:lang}}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input id="iLastName" class="input is-small" type="text" name="lastName" maxlength="20" [(ngModel)]="copyBusinessCard.lastname" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label for="iBirthDate" class="label">{{"Birthdate2" | translate:lang}}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input id="iBirthDate" class="input is-small" type="date" name="birthDate" [ngModel]="copyBusinessCard.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="copyBusinessCard.birthdate = $event" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label for="iPhone" class="label">{{"Phone" | translate:lang}}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input id="iPhone" class="input is-small" type="tel" name="phone" maxlength="15" [(ngModel)]="copyBusinessCard.phone" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label for="iEmail" class="label">{{"Email" | translate:lang}}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <input id="iEmail" class="input is-small" type="email" name="email" maxlength="50" [(ngModel)]="copyBusinessCard.email" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-grouped is-grouped-right">
+                    <p class="control">
+                        <button type="button" class="button" (click)="cancelDescription()">{{"Cancel" | translate:lang}}</button>
+                    </p>
+                    <p class="control">
+                        <button type="submit" class="button is-dark" 
+                        [class.is-loading]="isProcessing" [disabled]="!bcDescriptionForm.form.valid">{{"Validate" | translate:lang}}</button>
+                    </p>
+                </div>
+            </form>
             <article class="tile is-child notification is-dark">
                 <h1 class="title">Skills</h1>
                 <a><span class="tag is-primary">Primary</span></a>
