@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.1.
 
+## Sign in
+Currently there is only one account registered and no option to sign up. To sign in please use the following account:
+
+* login: lottier.jm@gmail.com
+* password: password
+
 ## Docker commands
 
 Build docker image:
