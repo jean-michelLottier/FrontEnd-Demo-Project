@@ -33,7 +33,7 @@ export class ItemService implements OnInit {
 
     updateItem (item:Item.ItemInterface) {
         console.log("update item service");
-        return this.http.post(Item.BACKEND_URL + '/update', item, {
+        return this.http.post(Item.BACKEND_URL + '/item/update', item, {
             headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
             withCredentials: true
         });
@@ -43,7 +43,7 @@ export class ItemService implements OnInit {
         console.log("create item service");
         let body = JSON.stringify(item).replace(new RegExp('\"_', 'ig'), "\"");
 
-        return this.http.post(Item.BACKEND_URL + "/new", body, {
+        return this.http.post(Item.BACKEND_URL + "/item/new", body, {
             headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
             withCredentials: true
         });
@@ -51,7 +51,7 @@ export class ItemService implements OnInit {
 
     deleteItem(id: number) {
         console.log("delete item service");
-        return this.http.get(Item.BACKEND_URL + '/delete/' + id, {
+        return this.http.get(Item.BACKEND_URL + '/item/delete/' + id, {
             headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
             withCredentials: true
         });

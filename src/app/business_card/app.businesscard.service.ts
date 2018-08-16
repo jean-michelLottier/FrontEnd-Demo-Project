@@ -19,8 +19,8 @@ export class BusinessCardService {
 
     createBusinessCard(businessCard: IBusinessCard) {/*TODO*/}
 
-    updateBusinessCard(businessCard: IBusinessCard) {
-        return this.http.post(Item.BACKEND_URL + '/businesscard/update', businessCard, {
+    updateBusinessCard(businessCard: IBusinessCard, lang: string) {
+        return this.http.post(Item.BACKEND_URL + '/' + lang + '/businesscard/update', businessCard, {
             headers: (new HttpHeaders()).set('Content-Type', 'application/json'),
             withCredentials: true
         });

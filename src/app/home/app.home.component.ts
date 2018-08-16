@@ -43,8 +43,9 @@ export class HomeComponent implements OnInit {
     }
 
     submitBusinessCard(): void {
+        let language = this.localeService.getCurrentLanguage();
         this.isProcessing = true;
-        this.businessCardService.updateBusinessCard(this.copyBusinessCard).subscribe(result => {
+        this.businessCardService.updateBusinessCard(this.copyBusinessCard, language).subscribe(result => {
             this.alertService.infoAlert(this.translationService.translate('YourPersonalInformationHaveBeenUpdated'));
             this.businessCard = Object.assign({}, this.copyBusinessCard);
             this.businessCardAlertService.alertBusinessCard(this.businessCard);
